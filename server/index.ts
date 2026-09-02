@@ -4,7 +4,6 @@ import { z } from "zod";
 import { prisma } from "./db.js";
 
 const app = express();
-const port = Number(process.env.PORT ?? 4000);
 
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
@@ -184,6 +183,8 @@ app.delete("/api/credentials/:id", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`OpiumStock API: http://localhost:${port}`);
+const port = Number(process.env.PORT) || 4000;
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`API listening on 0.0.0.0:${port}`);
 });
